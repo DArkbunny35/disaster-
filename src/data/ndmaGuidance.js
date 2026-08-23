@@ -171,5 +171,86 @@ export const DISASTER_GUIDELINES = {
         "Use chlorinated water only to avoid cholera/diarrhea outbreaks."
       ]
     }
+  },
+
+  medical: {
+    title: "Medical & Physical Emergencies (First Aid)",
+    source: "National Health Mission / Indian Red Cross Society Emergency First Aid Guidelines",
+    emergencyBullets: [
+      "CALL 112 / 108 IMMEDIATELY for Emergency Ambulance dispatch and provide exact location.",
+      "CHECK RESPONSIVENESS & AIRWAY: Check if person is conscious and breathing normally.",
+      "SEVERE BLEEDING: Apply direct firm pressure on wound with a sterile dressing or clean cloth. Elevate limb if no fracture.",
+      "UNRESPONSIVE & NOT BREATHING (CPR): Place hands in center of chest, push hard and fast (100–120 compressions/min).",
+      "SNAKEBITE: Keep patient calm and completely still. Immobilize bitten limb below heart level. DO NOT cut, suck, or apply tourniquet."
+    ],
+    urbanContext: {
+      before: [
+        "Maintain a certified First Aid Kit with sterile gauze, adhesive bandages, antiseptic, burn gel, CPR mask, and scissors.",
+        "Keep emergency contacts (112, 108, nearest trauma center) saved on speed dial."
+      ],
+      during: [
+        "Assess scene safety before approaching casualty.",
+        "Do not move suspected spinal/neck injury victims unless in immediate physical danger (fire/collapse).",
+        "Keep casualty warm and reassure them while awaiting ambulance."
+      ],
+      after: [
+        "Hand over incident details and exact symptoms observed to paramedics.",
+        "Restock used first aid supplies immediately."
+      ]
+    },
+    ruralContext: {
+      limitedGuidanceNotice: "In rural settings, rapid transport to Primary Health Centre (PHC) / Community Health Centre (CHC) with anti-venom and trauma stabilization is vital.",
+      before: [
+        "Know the location of the nearest Gram Panchayat PHC equipped with anti-snake venom and oxygen.",
+        "Keep a dedicated emergency transport contact (Gram Panchayat vehicle / 108 ambulance link)."
+      ],
+      during: [
+        "For snakebite: Note snake description if possible, immobilize limb with splint, transport to PHC immediately.",
+        "For heatstroke: Move patient to shade, apply wet cloths to neck, armpits, and groin, give ORS/water if conscious."
+      ],
+      after: [
+        "Ensure full medical evaluation at PHC/District Hospital before discharge."
+      ]
+    }
+  },
+
+  intrusion: {
+    title: "Home Intrusion & Physical Threat Protocol",
+    source: "Ministry of Home Affairs / Emergency Response Support System (ERSS 112) Safety Guidelines",
+    emergencyBullets: [
+      "CALL 112 / 100 IMMEDIATELY: Keep phone on silent/low volume and whisper exact address and situation to dispatcher.",
+      "BARRICADE & HIDE: Move to a lockable room, lock door, turn off lights, silence all phones, stay out of sight.",
+      "DO NOT CONFRONT INTRUDER: Prioritize life safety and escape over property defense.",
+      "ESCAPE SAFELY IF CLEAR: If a safe alternate exit (window/backdoor) is available without crossing the intruder, evacuate immediately.",
+      "SIGNAL FOR HELP: If trapped, use silent emergency SOS on phone or signal neighbors once safe."
+    ],
+    urbanContext: {
+      before: [
+        "Install solid deadbolts, peepholes, window latches, and apartment security door chains.",
+        "Maintain good relations with building security guards and society WhatsApp alert groups."
+      ],
+      during: [
+        "Lock bedroom door, barricade with heavy furniture if intruder is inside house.",
+        "Do not turn on lights; observe from safe angle and relay details to 112."
+      ],
+      after: [
+        "Wait for verified Police arrival before opening doors.",
+        "Do not touch door handles, windows, or items to preserve forensic evidence."
+      ]
+    },
+    ruralContext: {
+      limitedGuidanceNotice: "In village contexts, collective Gram Suraksha and community alarm systems are crucial.",
+      before: [
+        "Ensure sturdy boundary gates and secure cattle sheds.",
+        "Keep village emergency whistle or alert system accessible."
+      ],
+      during: [
+        "Alert neighbors/Panchayat members through quick phone call or covert signal if safe.",
+        "Stay barricaded until help arrives."
+      ],
+      after: [
+        "Report incident immediately to Gram Pradhan and local Police Thana."
+      ]
+    }
   }
 };

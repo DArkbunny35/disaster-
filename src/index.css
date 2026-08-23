@@ -372,6 +372,15 @@ body {
   background: rgba(239, 68, 68, 0.2);
 }
 
+.preset-pill.unrelated {
+  border-color: rgba(148, 163, 184, 0.4);
+  color: #CBD5E1;
+}
+
+.preset-pill.unrelated:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
 .preset-pill.prediction {
   border-color: rgba(245, 158, 11, 0.4);
   color: #FDE047;

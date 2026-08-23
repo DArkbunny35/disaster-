@@ -91,6 +91,11 @@ I provide documented action steps for floods, earthquakes, fires, and cyclones i
 
   const sampleScenarios = [
     {
+      label: "Unrelated: 'My flight is delayed'",
+      query: "my flight is delay",
+      type: "unrelated"
+    },
+    {
       label: "Rule 0: Water Rising Now (Dehradun)",
       query: "Water is entering my house in Uttarakhand rising fast right now! What do I do?",
       type: "emergency"
@@ -101,8 +106,8 @@ I provide documented action steps for floods, earthquakes, fires, and cyclones i
       type: "emergency"
     },
     {
-      label: "Rule 0: Smoke & Fire in Building (Mumbai)",
-      query: "There's smoke and fire in my building in Mumbai now! How do we get out?",
+      label: "Physical Emergency: Intruder",
+      query: "Someone is breaking in to my house right now help me now!",
       type: "emergency"
     },
     {
@@ -113,11 +118,6 @@ I provide documented action steps for floods, earthquakes, fires, and cyclones i
     {
       label: "Rule 2: Urban Flood Prep",
       query: "What is the official flood preparedness checklist for an apartment in Bangalore?",
-      type: "prep"
-    },
-    {
-      label: "Rule 2: Rural Village Prep",
-      query: "Documented rural flood prep kit for farmer with livestock in Assam village",
       type: "prep"
     }
   ];

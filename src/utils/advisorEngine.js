@@ -8,6 +8,8 @@ const EMERGENCY_PATTERNS = [
   /earthquake\s+(right\s+now|happening|now|shaking)/i,
   /(there's|there\s+is|fire|smoke)\s+(in|on|my|our)\s+(building|house|room|apartment|floor)\s*(now)?/i,
   /(i'm|i\s+am|we\s+are)\s+(trapped|stuck|cannot\s+get\s+out|can't\s+get\s+out)/i,
+  /(someone\s+(is\s+)?(breaking\s+in|inside\s+my\s+house|intruder|attacking))/i,
+  /(severe\s+bleeding|not\s+breathing|cardiac\s+arrest|snakebite\s+now|choking\s+now|gas\s+leak\s+now)/i,
   /(injured|missing|under\s+debris|collapsed)/i,
   /help\s+me\s+now/i,
   /sos/i
@@ -22,6 +24,30 @@ const PREDICTION_PATTERNS = [
   /forecast\s+for\s+next\s+(week|month|year)/i
 ];
 
+// Disaster & Physical Emergency/Safety Topics Allowlist Patterns
+const DISASTER_AND_SAFETY_PATTERNS = [
+  // Natural disasters & extreme weather
+  /\b(flood|flooding|inundat|waterlog|submerge|river|dam\s+break|overflow)\b/i,
+  /\b(earthquake|tremor|quake|seismic|aftershock|richter|fault\s+line)\b/i,
+  /\b(tsunami|tidal\s+wave|storm\s+surge)\b/i,
+  /\b(cyclone|typhoon|hurricane|storm|thunderstorm|lightning|gale|heavy\s+rain|cloudburst|downpour|monsoon)\b/i,
+  /\b(landslide|mudslide|rockslide|avalanche|debris\s+flow|sinkhole)\b/i,
+  /\b(heatwave|loo|coldwave|drought|extreme\s+weather|tornado|hailstorm)\b/i,
+
+  // Fire & hazardous materials
+  /\b(fire|blaze|smoke|flame|wildfire|cylinder\s+(blast|leak)|gas\s+leak|lpg\s+leak|chemical\s+spill|explosion|building\s+collapse)\b/i,
+
+  // Physical & Medical Emergencies
+  /\b(medical\s+emergency|ambulance|cpr|cardiac|heart\s+attack|stroke|unconscious|faint|bleeding|wound|fracture|broken\s+bone|burns?|scalds?|electrocution|electric\s+shock|snakebite|poison|poisoning|drowning|choking|hypothermia|heatstroke|first\s+aid)\b/i,
+  /\b(home\s+intrusion|intruder|break[- ]in|burglar|robber|assault|physical\s+safety|trapped|stuck|evacuat|sos|rescue|helpline)\b/i,
+
+  // Disaster Management & Preparedness Terms
+  /\b(disaster|emergency|preparedness|prep|survival|go[- ]bag|disaster\s+kit|emergency\s+kit|first\s+aid\s+kit|ndma|sdma|ndrf|sdrf|ddma|erss|imd|cwc|red\s+alert|orange\s+alert|yellow\s+alert|shelter|relief\s+camp|do'?s\s+and\s+don'?ts|hazard|siren|drill|safety\s+measures|safety\s+protocol|safety\s+tips)\b/i,
+
+  // Direct Emergency Numbers
+  /\b(112|108|101|100|1070|1077|1078)\b/
+];
+
 // List of Indian states for detection
 const INDIAN_STATES = [
   "uttarakhand", "maharashtra", "mumbai", "gujarat", "assam", "kerala",
@@ -34,6 +60,23 @@ export const processUserQuery = (queryText, contextMode = 'urban') => {
   const query = queryText.trim();
   const lowerQuery = query.toLowerCase();
 
+  // ==========================================
+  // TOPIC FILTER: REFUSE UNRELATED EVERYDAY QUERIES
+  // ==========================================
+  const isDisasterOrSafetyRelated = DISASTER_AND_SAFETY_PATTERNS.some(pattern => pattern.test(lowerQuery)) ||
+    EMERGENCY_PATTERNS.some(pattern => pattern.test(lowerQuery)) ||
+    PREDICTION_PATTERNS.some(pattern => pattern.test(lowerQuery));
+
+  if (!isDisasterOrSafetyRelated) {
+    return {
+      ruleTriggered: "RULE_UNRELATED_REFUSAL",
+      ruleName: "Topic Refusal",
+      badgeType: "warning",
+      isEmergency: false,
+      text: "I am specifically designed for disaster preparedness and emergency response. I cannot assist with everyday tasks or unrelated topics."
+    };
+  }
+
   // 1. Detect State mentioned in query
   let detectedState = "";
   for (const st of INDIAN_STATES) {
@@ -43,15 +86,29 @@ export const processUserQuery = (queryText, contextMode = 'urban') => {
     }
   }
 
-  // 2. Detect Disaster Type
+  // 2. Detect Disaster / Emergency Category
   let detectedDisaster = "flood";
-  if (lowerQuery.includes("earthquake") || lowerQuery.includes("shak")) {
+  if (lowerQuery.includes("earthquake") || lowerQuery.includes("shak") || lowerQuery.includes("tremor")) {
     detectedDisaster = "earthquake";
-  } else if (lowerQuery.includes("fire") || lowerQuery.includes("smoke")) {
+  } else if (lowerQuery.includes("fire") || lowerQuery.includes("smoke") || lowerQuery.includes("flame") || lowerQuery.includes("cylinder")) {
     detectedDisaster = "fire";
-  } else if (lowerQuery.includes("cyclone") || lowerQuery.includes("storm")) {
+  } else if (lowerQuery.includes("cyclone") || lowerQuery.includes("storm") || lowerQuery.includes("wind") || lowerQuery.includes("tornado")) {
     detectedDisaster = "cyclone";
-  } else if (lowerQuery.includes("flood") || lowerQuery.includes("water") || lowerQuery.includes("rain")) {
+  } else if (lowerQuery.includes("intrusion") || lowerQuery.includes("intruder") || lowerQuery.includes("break in") || lowerQuery.includes("burglar")) {
+    detectedDisaster = "intrusion";
+  } else if (
+    lowerQuery.includes("medical") ||
+    lowerQuery.includes("cpr") ||
+    lowerQuery.includes("heart attack") ||
+    lowerQuery.includes("bleed") ||
+    lowerQuery.includes("snakebite") ||
+    lowerQuery.includes("poison") ||
+    lowerQuery.includes("first aid") ||
+    lowerQuery.includes("choking") ||
+    lowerQuery.includes("unconscious")
+  ) {
+    detectedDisaster = "medical";
+  } else if (lowerQuery.includes("flood") || lowerQuery.includes("water") || lowerQuery.includes("rain") || lowerQuery.includes("inundat")) {
     detectedDisaster = "flood";
   }
 
@@ -89,7 +146,7 @@ export const processUserQuery = (queryText, contextMode = 'urban') => {
     const responseText = [
       contactLines.join("\n"),
       "",
-      `IMMEDIATE ACTION STEPS (NDMA Guidelines - ${guidelines.title}):`,
+      `IMMEDIATE ACTION STEPS (NDMA / Emergency Guidelines - ${guidelines.title}):`,
       ...immediateSteps.map(step => `• ${step}`)
     ].join("\n");
 
