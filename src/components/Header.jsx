@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldAlert, PhoneCall, Radio, FileText, CheckSquare, CloudRain, Code2 } from 'lucide-react';
+import { ShieldAlert, PhoneCall, Radio, FileText, CheckSquare, CloudRain, Code2, Landmark } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab, emergencyMode }) {
   return (
@@ -35,6 +35,14 @@ export default function Header({ activeTab, setActiveTab, emergencyMode }) {
           >
             <Radio size={16} />
             <span>AI Advisor & Emergency Engine</span>
+          </button>
+
+          <button
+            className={`nav-btn ${activeTab === 'relief' ? 'active' : ''}`}
+            onClick={() => setActiveTab('relief')}
+          >
+            <Landmark size={16} />
+            <span>Govt Disaster Relief</span>
           </button>
 
           <button

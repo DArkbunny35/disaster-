@@ -5,6 +5,7 @@ import EmergencyContactsMatrix from './components/EmergencyContactsMatrix';
 import PreparednessVault from './components/PreparednessVault';
 import ImdForecastHub from './components/ImdForecastHub';
 import SystemPromptInspector from './components/SystemPromptInspector';
+import GovernmentReliefAssistance from './components/GovernmentReliefAssistance';
 import { ShieldAlert, PhoneCall, X, AlertTriangle, ExternalLink } from 'lucide-react';
 
 export default function App() {
@@ -42,6 +43,9 @@ export default function App() {
       <main className="main-content">
         {activeTab === 'advisor' && (
           <AdvisorChat onTriggerEmergency={() => setEmergencyMode(true)} />
+        )}
+        {activeTab === 'relief' && (
+          <GovernmentReliefAssistance onNavigateToContacts={() => setActiveTab('contacts')} />
         )}
         {activeTab === 'contacts' && <EmergencyContactsMatrix />}
         {activeTab === 'vault' && <PreparednessVault />}
