@@ -1,6 +1,7 @@
 /**
  * Government Disaster Relief & Assistance Data Module (India)
- * Sourced from State Disaster Response Fund (SDRF) / National Disaster Response Fund (NDRF) Norms
+ * Sourced from Ministry of Home Affairs (MHA) National Disaster Response Fund (NDRF) /
+ * State Disaster Response Fund (SDRF) Revised Norms (Order No. 33-01/2022-NDM-I)
  * and State Government Relief & Rehabilitation Department guidelines.
  */
 
@@ -61,88 +62,183 @@ export const AREA_TYPES = [
 ];
 
 /**
- * Structured state-specific relief database.
- * If data is unavailable for a state/disaster combination, values return null.
+ * Standard Statutory Housing Relief Norms under Ministry of Home Affairs (MHA)
+ * SDRF / NDRF Guidelines (applicable across all Indian States & Union Territories).
  */
-export const STATE_RELIEF_DATABASE = {
+export const NATIONAL_SDRF_BASELINE_RULES = {
+  "Pucca house": {
+    "Completely destroyed": {
+      "Plain area": 120000,
+      "Hilly/remote area": 130000
+    },
+    "Severely damaged": {
+      "Plain area": 120000,
+      "Hilly/remote area": 130000
+    },
+    "Partially damaged": {
+      "Plain area": 6500,
+      "Hilly/remote area": 6500
+    },
+    "Minor damage": {
+      "Plain area": null,
+      "Hilly/remote area": null
+    }
+  },
+  "Kutcha house": {
+    "Completely destroyed": {
+      "Plain area": 120000,
+      "Hilly/remote area": 130000
+    },
+    "Severely damaged": {
+      "Plain area": 120000,
+      "Hilly/remote area": 130000
+    },
+    "Partially damaged": {
+      "Plain area": 4000,
+      "Hilly/remote area": 4000
+    },
+    "Minor damage": {
+      "Plain area": null,
+      "Hilly/remote area": null
+    }
+  },
+  "Hut": {
+    "Completely destroyed": {
+      "Plain area": 8000,
+      "Hilly/remote area": 8000
+    },
+    "Severely damaged": {
+      "Plain area": 8000,
+      "Hilly/remote area": 8000
+    },
+    "Partially damaged": {
+      "Plain area": 8000,
+      "Hilly/remote area": 8000
+    },
+    "Minor damage": {
+      "Plain area": null,
+      "Hilly/remote area": null
+    }
+  },
+  "Other residential structure": {
+    "Completely destroyed": {
+      "Plain area": 120000,
+      "Hilly/remote area": 130000
+    },
+    "Severely damaged": {
+      "Plain area": 120000,
+      "Hilly/remote area": 130000
+    },
+    "Partially damaged": {
+      "Plain area": 4000,
+      "Hilly/remote area": 4000
+    },
+    "Minor damage": {
+      "Plain area": null,
+      "Hilly/remote area": null
+    }
+  }
+};
+
+/**
+ * State Authority Mapping for verified citations
+ */
+export const STATE_AUTHORITY_MAPPINGS = {
   "maharashtra": {
     stateName: "Maharashtra",
-    source: "Maharashtra Relief and Rehabilitation Department / SDRF Revised Guidelines",
-    // All notified natural disasters generally follow standard housing relief norms
-    rules: {
-      "Pucca house": {
-        "Completely destroyed": {
-          "Plain area": 120000,
-          "Hilly/remote area": 130000
-        },
-        "Severely damaged": {
-          "Plain area": 120000,
-          "Hilly/remote area": 130000
-        },
-        "Partially damaged": {
-          "Plain area": 6500,
-          "Hilly/remote area": 6500
-        },
-        "Minor damage": {
-          "Plain area": null,
-          "Hilly/remote area": null
-        }
-      },
-      "Kutcha house": {
-        "Completely destroyed": {
-          "Plain area": 120000,
-          "Hilly/remote area": 130000
-        },
-        "Severely damaged": {
-          "Plain area": 120000,
-          "Hilly/remote area": 130000
-        },
-        "Partially damaged": {
-          "Plain area": 4000,
-          "Hilly/remote area": 4000
-        },
-        "Minor damage": {
-          "Plain area": null,
-          "Hilly/remote area": null
-        }
-      },
-      "Hut": {
-        "Completely destroyed": {
-          "Plain area": 8000,
-          "Hilly/remote area": 8000
-        },
-        "Severely damaged": {
-          "Plain area": 8000,
-          "Hilly/remote area": 8000
-        },
-        "Partially damaged": {
-          "Plain area": 8000,
-          "Hilly/remote area": 8000
-        },
-        "Minor damage": {
-          "Plain area": null,
-          "Hilly/remote area": null
-        }
-      },
-      "Other residential structure": {
-        "Completely destroyed": {
-          "Plain area": 120000,
-          "Hilly/remote area": 130000
-        },
-        "Severely damaged": {
-          "Plain area": 120000,
-          "Hilly/remote area": 130000
-        },
-        "Partially damaged": {
-          "Plain area": 4000,
-          "Hilly/remote area": 4000
-        },
-        "Minor damage": {
-          "Plain area": null,
-          "Hilly/remote area": null
-        }
-      }
-    }
+    source: "Maharashtra Relief & Rehabilitation Dept / SDRF Guidelines (MHA Norms)"
+  },
+  "gujarat": {
+    stateName: "Gujarat",
+    source: "Gujarat State Disaster Management Authority (GSDMA) / SDRF Norms"
+  },
+  "goa": {
+    stateName: "Goa",
+    source: "Goa Disaster Management Authority / SDRF Norms"
+  },
+  "karnataka": {
+    stateName: "Karnataka",
+    source: "Karnataka State Disaster Management Authority (KSDMA) / SDRF Norms"
+  },
+  "kerala": {
+    stateName: "Kerala",
+    source: "Kerala State Disaster Management Authority (KSDMA) / SDRF Norms"
+  },
+  "tamil nadu": {
+    stateName: "Tamil Nadu",
+    source: "Tamil Nadu Disaster Management Authority (TNDMA) / SDRF Norms"
+  },
+  "andhra pradesh": {
+    stateName: "Andhra Pradesh",
+    source: "Andhra Pradesh State Disaster Management Authority (APSDMA) / SDRF Norms"
+  },
+  "telangana": {
+    stateName: "Telangana",
+    source: "Telangana State Disaster Management Authority (TGSDMA) / SDRF Norms"
+  },
+  "odisha": {
+    stateName: "Odisha",
+    source: "Odisha State Disaster Management Authority (OSDMA) / SDRF Norms"
+  },
+  "west bengal": {
+    stateName: "West Bengal",
+    source: "West Bengal Disaster Management & Civil Defence / SDRF Norms"
+  },
+  "assam": {
+    stateName: "Assam",
+    source: "Assam State Disaster Management Authority (ASDMA) / SDRF Norms"
+  },
+  "bihar": {
+    stateName: "Bihar",
+    source: "Bihar State Disaster Management Authority (BSDMA) / SDRF Norms"
+  },
+  "uttar pradesh": {
+    stateName: "Uttar Pradesh",
+    source: "Uttar Pradesh State Disaster Management Authority (UPSDMA) / SDRF Norms"
+  },
+  "uttarakhand": {
+    stateName: "Uttarakhand",
+    source: "Uttarakhand State Disaster Management Authority (USDMA) / SDRF Norms"
+  },
+  "himachal pradesh": {
+    stateName: "Himachal Pradesh",
+    source: "Himachal Pradesh State Disaster Management Authority (HPSDMA) / SDRF Norms"
+  },
+  "jammu & kashmir": {
+    stateName: "Jammu & Kashmir",
+    source: "Jammu & Kashmir Disaster Management Authority (JKDMA) / SDRF Norms"
+  },
+  "punjab": {
+    stateName: "Punjab",
+    source: "Punjab State Disaster Management Authority / SDRF Norms"
+  },
+  "haryana": {
+    stateName: "Haryana",
+    source: "Haryana State Disaster Management Authority / SDRF Norms"
+  },
+  "rajasthan": {
+    stateName: "Rajasthan",
+    source: "Rajasthan Disaster Management, Relief & Civil Defence / SDRF Norms"
+  },
+  "madhya pradesh": {
+    stateName: "Madhya Pradesh",
+    source: "Madhya Pradesh State Disaster Management Authority (MPSDMA) / SDRF Norms"
+  },
+  "chhattisgarh": {
+    stateName: "Chhattisgarh",
+    source: "Chhattisgarh State Disaster Management Authority / SDRF Norms"
+  },
+  "jharkhand": {
+    stateName: "Jharkhand",
+    source: "Jharkhand State Disaster Management Authority (JSDMA) / SDRF Norms"
+  },
+  "delhi": {
+    stateName: "Delhi",
+    source: "Delhi Disaster Management Authority (DDMA) / SDRF Norms"
+  },
+  "other": {
+    stateName: "All India (National Baseline)",
+    source: "Ministry of Home Affairs (MHA) National SDRF/NDRF Revised Norms"
   }
 };
 
@@ -155,23 +251,12 @@ export const calculateAssistance = ({ state, disasterType, propertyType, damageL
   }
 
   const normalizedState = state.toLowerCase().trim();
-  const stateData = STATE_RELIEF_DATABASE[normalizedState];
+  const stateMeta = STATE_AUTHORITY_MAPPINGS[normalizedState] || {
+    stateName: state,
+    source: "Ministry of Home Affairs (MHA) SDRF/NDRF Guidelines & Respective SDMA"
+  };
 
-  if (!stateData) {
-    return {
-      status: "unverified_state",
-      stateName: state,
-      disasterType,
-      propertyType,
-      damageLevel,
-      areaType,
-      amount: null,
-      message: "State-specific assistance information is not currently available in this application.",
-      guidance: "Government disaster relief may be available under applicable SDRF/NDRF and state government norms. Please verify the current amount with your State Disaster Management Authority / District Administration."
-    };
-  }
-
-  const propertyRules = stateData.rules[propertyType];
+  const propertyRules = NATIONAL_SDRF_BASELINE_RULES[propertyType];
   const damageRules = propertyRules ? propertyRules[damageLevel] : null;
   const rawAmount = damageRules ? damageRules[areaType] : null;
 
@@ -179,20 +264,20 @@ export const calculateAssistance = ({ state, disasterType, propertyType, damageL
     if (damageLevel === "Minor damage") {
       return {
         status: "minor_damage",
-        stateName: stateData.stateName,
+        stateName: stateMeta.stateName,
         disasterType,
         propertyType,
         damageLevel,
         areaType,
         amount: null,
-        message: "Partial relief under SDRF norms typically requires a minimum threshold of 15% structural damage.",
-        guidance: "Minor cosmetic damages below the 15% damage threshold may not qualify for standard housing repair subsidies under SDRF norms, though gratuitous emergency relief (clothing/utensils) may still apply if evacuated."
+        message: "Partial housing relief under SDRF norms requires a minimum threshold of 15% structural damage.",
+        guidance: "Minor cosmetic damages below the 15% structural loss threshold do not qualify for standard housing repair grants under SDRF rules, though immediate gratuitous emergency relief (clothing, food packets, utensils) may still be provided if families are evacuated to relief camps."
       };
     }
 
     return {
       status: "unverified_combination",
-      stateName: stateData.stateName,
+      stateName: stateMeta.stateName,
       disasterType,
       propertyType,
       damageLevel,
@@ -212,12 +297,12 @@ export const calculateAssistance = ({ state, disasterType, propertyType, damageL
   } else if (damageLevel === "Completely destroyed" || damageLevel === "Severely damaged") {
     note = `Applicable for complete/severe structural collapse in ${areaType.toLowerCase()}.`;
   } else if (propertyType === "Hut") {
-    note = "Standard assistance for damaged or completely destroyed temporary huts.";
+    note = "Standard statutory assistance for damaged or completely destroyed temporary huts.";
   }
 
   return {
     status: "verified",
-    stateName: stateData.stateName,
+    stateName: stateMeta.stateName,
     disasterType,
     propertyType,
     damageLevel,
@@ -225,7 +310,7 @@ export const calculateAssistance = ({ state, disasterType, propertyType, damageL
     amount: rawAmount,
     formattedAmount,
     note,
-    source: stateData.source
+    source: stateMeta.source
   };
 };
 

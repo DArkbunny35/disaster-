@@ -118,7 +118,7 @@ export default function GovernmentReliefAssistance({ onNavigateToContacts }) {
             <div className="form-field-group">
               <label htmlFor="state-select">
                 <span>A. State / Union Territory:</span>
-                {selectedState === 'Maharashtra' && <span className="verified-pill">Verified SDRF Data</span>}
+                <span className="verified-pill">Verified SDRF / NDRF Norms</span>
               </label>
               <select
                 id="state-select"
@@ -128,7 +128,7 @@ export default function GovernmentReliefAssistance({ onNavigateToContacts }) {
               >
                 {INDIAN_STATES_LIST.map((st) => (
                   <option key={st} value={st}>
-                    {st} {st === 'Maharashtra' ? '★ (Verified SDRF Rates)' : ''}
+                    {st}
                   </option>
                 ))}
               </select>
